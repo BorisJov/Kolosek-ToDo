@@ -1,0 +1,53 @@
+<h1>Tasks</h1>
+
+<%= form_for :task, url: tasks_path do |form| %>
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          <div class="field">
+            <%= form.label :text %>
+            <%= form.text_field :text, id: :task_text %>
+          </div>
+           <div class="actions">
+            <%= form.submit %>
+          </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+<% end %>
+
+<table>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td <%= 'id=task' + task.id.to_s %>
+          <% if task.done %>
+          <%= 'style=color:#FF0000'%>
+          <% end %> >
+        <%= task.text %>
+      </td>
+      <td>
+        <button type="button" onclick="updateTask(<%= task.id %>)" id=<%= task.id %>> Check </button>
+      </td>
+    <% end %>
+  </tbody>
+</table>
+
+
+<script>
+    function updateTask(id) {
+        console.log('updating task with id', id);
+        $.ajax({
+                type: 'PUT',
+                url: "<%= tasks_path %>/" + id,
+                contentType: 'application/json',
+                success: function (response) {
+                    $('#' + id + '_content').css('color', 'red');
+                },
+                error: function (error){
+                    alert(error.responseText);
+                }        });
+    }
+</script>
