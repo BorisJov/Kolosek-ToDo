@@ -1,0 +1,12 @@
+<% @tasks.each do |task| %>
+    <div class="row">
+      <div class="col-md-3" <%= item_name(task) %>>
+        <%= task.text %>
+      </div>
+      <% if !task.done? %>
+        <div class="col-md-2">
+          <%= button_to 'Check', task_path(task), method: :put, remote: true %>
+        </div>
+      <% end %>
+    </div>
+<% end %>

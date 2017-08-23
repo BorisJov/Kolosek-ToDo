@@ -7,6 +7,7 @@ class Task < ApplicationRecord
 
   def done!
     self.done = true
+    save!
   end
 
 end

@@ -13,8 +13,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params.require(:id))
     @task.done!
-    @task.save
-    render json:{}
+    @tasks = Task.all
   end
 
   private
