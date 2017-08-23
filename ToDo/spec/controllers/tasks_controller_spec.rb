@@ -43,18 +43,9 @@ RSpec.describe TasksController, type: :controller do
   describe 'PUT #update' do
     it 'makes the task done' do
       task = Task.create! valid_attributes
-      put :update, params: { id: task.to_param }, session: valid_session
+      put :complete, params: { id: task.to_param }, session: valid_session
       task.reload
       expect(task.done).to eq(true)
-    end
-
-    xit 'redirects to the index' do
-
-      # ne znam kako se za json testira
-
-      task = Task.create! valid_attributes
-      put :update, params: { id: task.to_param, task: valid_attributes }, session: valid_session
-      expect(response).to redirect_to(tasks_path)
     end
   end
 end

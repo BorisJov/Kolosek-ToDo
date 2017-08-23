@@ -22,22 +22,3 @@
   <div class="container">
     <%= render partial: 'tasks' %>
   </div>
-
-
-<script>
-
-    function updateTask(id) {
-        console.log('updating task with id', id);
-        $.ajax({
-                type: 'PUT',
-                url: "<%= tasks_path %>/" + id,
-                contentType: 'application/json',
-                success: function (response) {
-                    $('#task_' + id).css('color', 'red');
-                    $('#task_button_'+id).remove('#task_button_'+id);
-                },
-                error: function (error){
-                    alert(error.responseText);
-                }        });
-    }
-</script>

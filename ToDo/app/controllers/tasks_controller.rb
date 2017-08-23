@@ -9,8 +9,7 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-
-  def update
+  def complete
     @task = Task.find(params.require(:id))
     @task.done!
     @tasks = Task.all
