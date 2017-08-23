@@ -1,43 +1,52 @@
-<h1>Tasks</h1>
+<!DOCTYPE html>
 
-<%= form_for :task, url: tasks_path do |form| %>
-    <table>
+<html>
+  <head>
+    <h1 class="">Tasks</h1>
+  </head>
+  <body>
+    <div id="input_form" class="form-group">
+    <%= form_for :task, url: tasks_path do |form| %>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <div class="field">
+                  <%= form.text_field :text, id: :task_text %>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <%= form.submit %>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    <% end %>
+    </div>
+
+    <table class="table">
       <tbody>
-      <tr>
-        <td>
-          <div class="field">
-            <%= form.text_field :text, id: :task_text %>
-          </div>
-        <td>
-          <div class="actions">
-           <%= form.submit %>
-          </div>
-        </td>
-        </td>
+        <% @tasks.each do |task| %>
+        <tr>
+          <td <%= item_name(task) %>>
+            <%= task.text %>
+          </td>
+          <% if !task.done? %>
+            <td>
+              <button   class="btn"  type="button" onclick="updateTask(<%= task.id %>)" id=<%="task_button_"+task.id.to_s%>>Check</button>
+            </td>
+          <% end %>
         </tr>
+        <% end %>
       </tbody>
     </table>
-<% end %>
-
-<table>
-  <tbody>
-    <% @tasks.each do |task| %>
-    <tr>
-      <td <%= 'id=task' + task.id.to_s %>
-          <% if task.done %>
-          <%= 'style=color:#FF0000'%>
-          <% end %> >
-        <%= task.text %>
-      </td>
-      <td>
-        <button type="button" onclick="updateTask(<%= task.id %>)" id=<%= task.id %>> Check </button>
-      </td>
-    <% end %>
-  </tbody>
-</table>
-
+  </body>
+</html>
 
 <script>
+
     function updateTask(id) {
         console.log('updating task with id', id);
         $.ajax({
@@ -45,7 +54,8 @@
                 url: "<%= tasks_path %>/" + id,
                 contentType: 'application/json',
                 success: function (response) {
-                    $('#' + id + '_content').css('color', 'red');
+                    $('#task_' + id).css('color', 'red');
+                    $('#task_button_'+id).remove('#task_button_'+id);
                 },
                 error: function (error){
                     alert(error.responseText);

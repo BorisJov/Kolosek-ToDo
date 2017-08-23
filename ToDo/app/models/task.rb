@@ -2,11 +2,11 @@ class Task < ApplicationRecord
   validates :text, presence: true
 
   def done?
-    done
+    self.done
   end
 
   def done!
-    done = true
+    self.done = true
   end
 
 end

@@ -12,12 +12,13 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params.require(:id))
-    @task.done = true
+    @task.done!
     @task.save
     render json:{}
   end
 
-  def task_params
-    params.require(:task).permit(:text, :done)
-  end
+  private
+    def task_params
+      params.require(:task).permit(:text, :done)
+    end
 end
