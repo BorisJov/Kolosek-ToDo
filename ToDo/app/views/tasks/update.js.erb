@@ -1,3 +1,3 @@
 $('#task_' + <%=@task.id%>).css('color', 'red');
-$('#task_button_'+<%=@task.id%>).remove('#task_button_'+<%=@task.id%>);
+$('#button_'+<%=@task.id%>).remove('#button_'+<%=@task.id%>);
 $("#tasks").html("<%= j render(partial: 'tasks') %>");
