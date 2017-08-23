@@ -1,3 +1,12 @@
 class Task < ApplicationRecord
-  validates :text, :done, presence: true
+  validates :text, presence: true
+
+  def done?
+    done
+  end
+
+  def done!
+    done = true
+  end
+
 end

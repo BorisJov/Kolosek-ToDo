@@ -9,4 +9,5 @@ RSpec.describe Task, type: :model do
     expect(task).to be_valid
   end
   it 'is invalid without text' do
+  end
 end
