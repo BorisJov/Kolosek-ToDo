@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <h1 class="">Tasks</h1>
-  </head>
-  <body>
-    <div id="input_form" class="form-group">
+    <h1 class="display-4">Tasks</h1>
+    <div id="input_form" class="form-group ">
     <%= form_for :task, url: tasks_path do |form| %>
         <table>
           <tbody>
@@ -29,7 +26,7 @@
     <table class="table">
       <tbody>
         <% @tasks.each do |task| %>
-        <tr>
+        <tr class="row">
           <td <%= item_name(task) %>>
             <%= task.text %>
           </td>
@@ -42,7 +39,6 @@
         <% end %>
       </tbody>
     </table>
-  </body>
 </html>
 
 <script>
