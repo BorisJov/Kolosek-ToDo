@@ -11,5 +11,14 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TasksHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'item_name' do
+    it 'returns id + style for task.done?==true' do
+      task = FactoryGirl.create(:done_task)
+      expect(helper.item_name(task)).to eq("id=task_#{task.id} style=color:#FF0000")
+    end
+    it 'returns just id for task.done?==false' do
+      task = FactoryGirl.create(:task)
+      expect(helper.item_name(task)).to eq("id=task_#{task.id}")
+    end
+  end
 end
